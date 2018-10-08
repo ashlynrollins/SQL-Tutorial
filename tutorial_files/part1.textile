@@ -45,9 +45,9 @@ Go to "this page":https://sqlitebrowser.org/, download the installer appropriate
 
 Once finished, search for the program and fire it up. 
 
-On a Mac, you can hit `Command + Space bar` and type your search to find the program, or search in *Launchpad*.
+On a Mac, you can hit @Command + Space bar@ and type your search to find the program, or search in *Launchpad*.
 
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/dbbrowser_start_window.png!
+!images/db-browser/start_window.png!
 
 h3. Creating the First Database
 
