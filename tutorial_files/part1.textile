@@ -53,7 +53,9 @@ h3. Creating the First Database
 
 Mousing over each of the icons at the top of the DB Browser tool will show what the icon does.
 
-To create a database, simply click on the icon for "New Database" !images/db-browser/new_database.png!
+To create a database, simply click on the icon for "New Database" 
+
+!images/db-browser/new_database.png!
 
 Name the database "test" and save it anywhere you like (the desktop will work, or your documents folder). This single file will contain the entire database you create.
 
