@@ -138,9 +138,12 @@ INSERT INTO contributors (last_name, first_name, city, state, zip, amount) VALUE
 </code></pre>
 
 You can paste these three lines into the 'Enter SQL' text box together. The semi-colons indicate the end of each statement.
-Click "Execute SQL"
 
-Again, you can view the results in the "Browse Data" tab.
+bq. Before inserting these new records, you should delete the original @INSERT@ statement to avoid re-inserting it.
+
+Click "Execute SQL".
+
+Again, you can view the results in the "Browse Data" tab. *You should see 4 records in total now.*
 
 h3. Selecting Data
 
