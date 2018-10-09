@@ -277,17 +277,25 @@ h3. Changing values with UPDATE
 Now we have some basic skills for creating tables, inserting data into the table and querying the data we've inserted. But what about changing the values in existing rows? To change the value of existing rows, we use the <code>UPDATE</code> statement.
 
 One thing that just looks wrong with our data set is that value "Nebraska" in the state column:
-<pre><code>SELECT state FROM contributors;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/state_column.png!
 
-That should be the postal abbreviation, like the other rows. To change that value, we need to use <code>UPDATE</code> to <code>SET</code> the value for a column. But we want to make sure we don't blow away the state values in our other columns.
+<pre><code>SELECT state FROM contributors;</code></pre>
+
+!images/db-browser/state_column.png!
+
+That should be the postal abbreviation, like the other rows. To change that value, we need to use @UPDATE@ to @SET@ the value for a column. *But we want to make sure we don't blow away the state values in our other columns.*
+
 If we just used <code>UPDATE contributors SET state = 'NE'; //DON'T DO THIS!!</code>, we would end up replacing the <code>state</code> value in every row with "NE". Not exactly what we want.
 
-So, we have to define a WHERE clause to determine which rows will be changed by the <code>UPDATE</code>:
+So, we have to define a @WHERE@ clause to determine which rows will be changed by the @UPDATE@:
+
 <pre><code>UPDATE contributors SET state = 'NE' WHERE state = 'Nebraska';</code></pre>
+
 Ok, let's see how the state list looks:
+
 <pre><code>SELECT DISTINCT state FROM contributors;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/state_after_update.png!
+
+!images/db-browser/state_after_update.png!
+
 Now that's more like it.
 
 h3. DELETE
