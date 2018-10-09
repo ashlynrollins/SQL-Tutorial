@@ -307,43 +307,59 @@ Before executing a <code>DELETE</code> or <code>UPDATE</code>, it's always a goo
 So, let's get rid of one of our rows. How about deleting Warren Buffet?
 
 For our <code>WHERE</code> clause, we could match on any column or combination of columns, but if we know the <code>PRIMARY KEY</code> value of the row, that's our safest bet. Because it's a unique identifier, we can be certain we're not accidentally deleting other rows. First let's make sure we have the row we want:
+
 <pre><code>SELECT * FROM contributors WHERE id = 1;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/buffet_by_id.png!
+
+!images/db-browser/buffet_by_id.png!
 
 Looks like the one we want, so let's delete it:
+
 <pre><code>DELETE FROM contributors WHERE id = 1;</code></pre>
-Notice that we don't need to specify columns or use <code>*</code> with <code>DELETE</code>, since we're deleting the entire row.
+
+bq. Notice that we don't need to specify columns or use <code>*</code> with <code>DELETE</code>, since we're deleting the entire row.
 
 Now the row should be gone:
+
 <pre><code>SELECT * FROM contributors;</code></pre>
 
 h3. Importing data from a file
 
 Finally let's move on to a topic that takes us a bit outside the basic SQL syntax. One common task we all face in data management is importing a data set into the database. Often, we receive a file in some other format such as MS Excel, CSV (comma-separated values) or tab-delimited and we want to get those values into a database table in order to run SQL queries on them. 
+fo
+Each database management system handles importing values from a file a bit differently. DB Browser for SQLite provides a nice interface for doing data imports from text files (you'll have to "export":http://office.microsoft.com/en-us/excel/HP100997251033.aspx#export an Excel file as a CSV before importing it).
 
-Each database management system handles importing values from a file a bit differently. The SQLite Manager provides a nice interface for doing data imports from text files (you'll have to "export":http://office.microsoft.com/en-us/excel/HP100997251033.aspx#export an Excel file as a CSV before importing it).
+First, let's grab a plain text file full of contributors from the FEC database. Go to ["tutorial_files/contributors.txt":contributors.txt] and save the file as "contributors.txt" somewhere you can find it (your desktop is a good place).
 
-First, let's grab a plain text file full of contributors from the FEC database. Go to ["https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/contributors.txt":https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/contributors.txt] and save the file as "contributors.txt" somewhere you can find it (your desktop is a good place).
+Notice that this file is pipe-delimited (the columns are separated by the **|** character). I find this delimiter easy to use because it's unlikely to appear within a value in the import data. But using comma or tab characters to separate the values will work as well.
 
-Notice that this file is pipe-delimited (the columns are separated by the **|** character). I find this delimiter easy to use because it's so unlikely to appear within a value in the import data. But using comma or tab characters to separate the values will work as well. Also notice that there is an **id** column here with no values in it. SQLite will populate that attribute for each row using auto-increment, much as it did for our earlier <code>INSERT</code> example.
+Also notice that there is no @id@ column here. DB Browser will be unable to directly import this data into the existing @contributors@ table. Instead, we'll import this data into a new, temporary table called @contributors_temp@, and then use a SQL @INSERT@ statement to copy the rows into our original @contributors@ table. Along the way, SQLite will populate the @id@ field for each row using auto-increment, the same as it did for our earlier @INSERT@ examples.
 
-Now that we know what we're importing, go back to the SQLite Manager (you may need to select it from the Window menu), and click the Import icon (!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/import_icon.png!).
+Now that we know what we're importing, go back to DB Browser and open the import wizard by selecting @File -> Import -> Table from CSV file...@, navigate to the "contributors.txt" file and click Open.
 
-The Import Wizard should appear, which you can use to define your import.
+The import wizard should appear, which you can use to define your import.
 
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/import.png!
+!images/db-browser/import_contribs_to_temp.png!
 
-* Using the **Select File** button, browse for the **contributors.txt** file you just saved.
-* Check the "First row contains column names" check box.
-* Select **Pipe(|)** for "Fields separated by"
+* Type "contributors_temp" in the "Table name" field
+* Check the "Column names in first line" checkbox.
+* Select the **pipe(|)** for "Field separator"
+* Uncheck the "Trim fields?" checkbox
+
 For everything else, you can keep the default selections.
 
-Click OK, and you'll get a couple of confirmation pop-ups, one asking if you're sure you want to import, and another asking if you want to import
-100 rows. Click OK for both.
+Click OK and the data should import into a new table called @contributors_temp@. 
+
+bq. Note that DB Browser is doing a bit of magic here. We didn't have to manually define the @contributors_temp@ table. Instead, DB Browser simply created a table with column names matching our field headers, autoamtically set the column data types to @TEXT@, and inserted the rows for us.
+
+Now that we loaded our temporary table, we're ready to copy the new rows into our main table by running the below SQL:
+
+<pre><code>INSERT INTO contributors(last_name, first_name, city, state, zip, amount) SELECT * FROM contributors_temp;</code></pre>
+
+Finally, you'll probably want to delete the temporary table now that it's done it's job. Just select @contributors_temp@, right-click and choose @Delete table@ and click Yes.
 
 And now you have 103 rows of data to play with. The FEC data is dirty: there are missing fields, first names include middle names, there are weird values for some columns. Play around with it using the SQL you know, and see what you can find out. If you get surprising results from a query or are wondering how to do something, add a comment to the blog post. 
 
-We'll pick up with some more advanced queries and functions in "Part II":https://github.com/tthibo/SQL-Tutorial/blob/master/tutorial_files/part2.textile.
+We'll pick up with some more advanced queries and functions in "Part II":part2.textile.
 
 h3. Further References
 
