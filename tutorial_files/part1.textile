@@ -187,29 +187,30 @@ The @WHERE@ clause provides the scalpel for your SQL operations. A well-crafted 
 
 Say, for example, we only wanted to see contributors from Georgia:
 
-<pre><code>SELECT * from contributors WHERE state='GA';</code></pre>
+<pre><code>SELECT * FROM contributors WHERE state='GA';</code></pre>
 
-(Remember the single quotes around the string "GA".)
+bq. Remember the single quotes around the string "GA)
 
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/where_clause1.png!
+!images/db-browser/where_clause1.png!
 
 And you can test for more than equality in the WHERE clause. This query finds only the contributors who have donated more than $1200: 
-<pre><code>SELECT * from contributors WHERE amount > 1200;</code></pre>
+<pre><code>SELECT * FROM contributors WHERE amount > 1200;</code></pre>
 
-Of course, donors who have given exactly $1200 won't be included in the results. To include them, use the >= operator:
-<pre><code>SELECT * from contributors WHERE amount >= 1200;</code></pre>
+Of course, donors who have given exactly $1200 won't be included in the results. To include them, use the @>=@ operator:
+
+<pre><code>SELECT * FROM contributors WHERE amount >= 1200;</code></pre>
 
 Here are some other operators you can use:
 
 |*operator*|*description*|
 |=|Equal|
-|<>|Not equal*|
+|!=|Not equal*|
 |>|Greater than|
 |<|Less than|
 |>=|Greater than or equal|
 |<=|Less than or equal|
 
-(*Many database systems also use != for "Not equal.")
+bq. * Many database systems also use <> for "Not equal"
 
 h3. Combining conditions with AND and OR
 
