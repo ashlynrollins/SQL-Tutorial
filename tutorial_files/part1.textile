@@ -121,7 +121,7 @@ Notice that we didn't insert a value for id. Because we set that column to AUTOI
 
 Finally, we didn't include dollar signs or commas in the "amount" column. We created the "amount" column as an integer, so we should only insert integers there. (Different database management systems will react differently if you try to insert non-numeric characters in an integer column; it's best to avoid doing so.)
 
-If you haven't done so already, click the Execute SQL button (!images/db-browser/execute_sql_button.png!). 
+If you haven't done so already, click the Execute SQL button !images/db-browser/execute_sql_button.png!.
 
 The bottom pane should say "Query executed successfully" followed by a copy of the SQL that was executed. *Success! You've added data!*
 
@@ -129,7 +129,7 @@ You can view the data by going to the "Browse Data" tab:
 
 !images/db-browser/browse_data.png!
 
-Just so we'll have some data to play with, let's execute a couple of other @INSERT@ statements. Go back to the "Execute SQL" tab and paste in these lines:
+Just so we'll have some data to play with, let's execute a few more @INSERT@ statements. Go back to the "Execute SQL" tab and paste in these lines:
 
 <pre><code>
 INSERT INTO contributors (last_name, first_name, city, state, zip, amount) VALUES ('Winfrey', 'Oprah', 'Chicago', 'IL', '60601', 500);
@@ -137,13 +137,13 @@ INSERT INTO contributors (last_name, first_name, city, state, zip, amount) VALUE
 INSERT INTO contributors (last_name, first_name, city, state, zip, amount) VALUES ('Cathy', 'S. Truett', 'Atlanta', 'GA', '30301', 1200);
 </code></pre>
 
-You can paste these three lines into the 'Enter SQL' text box together. The semi-colons indicate the end of each statement.
+You can paste all three lines into the SQL text box at the same time. The semi-colons indicate the end of each statement.
 
-bq. Before inserting these new records, you should delete the original @INSERT@ statement to avoid re-inserting it.
+bq. Before inserting these new records, you should delete the original @INSERT@ statement to avoid re-running it, which would result in a duplicate record.
 
-Click "Execute SQL".
+Click the "Execute SQL" button.
 
-Again, you can view the results in the "Browse Data" tab. *You should see 4 records in total now.*
+You can view the new records in the "Browse Data" tab. *You should see 4 rows in total now.*
 
 h3. Selecting Data
 
