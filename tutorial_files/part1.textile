@@ -147,42 +147,50 @@ You can view the new records in the "Browse Data" tab. *You should see 4 rows in
 
 h3. Selecting Data
 
-Now that we have a small data set to use, let's start querying it. In the "Execute SQL" tab, type the following in the "Enter SQL" text box:
-<pre><code>SELECT * FROM contributors;</code></pre>
-And click the "Run SQL" button.
+Now that we have a small data set to use, let's start querying it. In the "Execute SQL" tab, type the following into the SQL text box:
 
-You should see a nice grid display of all contributors you've added. The ***** character is a common wildcard. In this SELECT, it is used to indicate all columns. So, we have selected all columns from all rows in the contributors table.
+<pre><code>SELECT * FROM contributors;</code></pre>
+
+And click the "Execute SQL" button.
+
+You should see a nice grid display of all contributors you've added. The @*@ character is a common wildcard. In this SELECT, it is used to indicate all columns. So, we have selected all columns from all rows in the contributors table.
 
 To define which columns of data you want to return, simply provide a comma-separated list of column names to SELECT:
+
 <pre><code>SELECT city, state FROM contributors;</code></pre>
-Clicking "Run SQL" should give you a two-column table of cities and states.
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/city_state.png!
+
+Clicking "Execute SQL" should give you a two-column table of cities and states.
+
+!images/db-browser/city_state.png!
 
 h3. Using DISTINCT to get a distinct set
 
-The SELECT query above gives us a list of cities and states, but it includes duplicate rows for Atlanta, GA. Adding DISTINCT to the query eliminates the duplicates:
+The SELECT query above gives us a list of cities and states, but it includes duplicate rows for Atlanta, GA. Adding @DISTINCT@ to the query eliminates the duplicates:
 
 <pre><code>SELECT DISTINCT city, state FROM contributors;</code></pre>
 
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/select_distinct.png!
+!images/db-browser/select_distinct.png!
 
-Now you should have only three rows in your results, showing the distinct values for city and state in the table.
+Now you should have only three rows in your results, showing the unique combinations for city and state in the table.
 
 Notice what happens if you add the <code>last_name</code> field to the DISTINCT query:
 
 <pre><code>SELECT DISTINCT last_name, city, state FROM contributors;</code></pre>
 
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/select_distinct_lname.png!
+!images/db-browser/select_distinct_lname.png!
 
-We're back to four rows. There are four distinct combinations of last_name, city and state in the table, so that's what we get from DISTINCT.
+We're back to four rows. There are four distinct combinations of last_name, city and state in the table, so that's what we get from @DISTINCT@.
 
 h3. The WHERE Clause
 
-The WHERE clause provides the scalpel for your SQL operations. A well-crafted WHERE clause can let you take exactly the slice of the data you want. It sets the conditions for the SELECT, and the query will return only those rows that match the conditions.
+The @WHERE@ clause provides the scalpel for your SQL operations. A well-crafted @WHERE@ clause can let you take exactly the slice of the data you want. It sets the conditions for the SELECT, and the query will return only those rows that match the conditions.
 
 Say, for example, we only wanted to see contributors from Georgia:
+
 <pre><code>SELECT * from contributors WHERE state='GA';</code></pre>
+
 (Remember the single quotes around the string "GA".)
+
 !https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/where_clause1.png!
 
 And you can test for more than equality in the WHERE clause. This query finds only the contributors who have donated more than $1200: 
