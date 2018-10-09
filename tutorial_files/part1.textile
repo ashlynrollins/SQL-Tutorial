@@ -214,24 +214,37 @@ bq. * Many database systems also use <> for "Not equal"
 
 h3. Combining conditions with AND and OR
 
-You can combine conditions using AND and OR. For example, let's find all contributors from Georgia who have given more than $1000:
+You can combine conditions using @AND@ and @OR@. For example, let's find all contributors from Georgia who have given more than $1000:
+
 <pre><code>SELECT * FROM contributors WHERE state = 'GA' AND amount > 1000;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/first_and.png!
+
+!images/db-browser/first_and.png!
 
 Now let's find all contributors who either live in Georgia or who have given more than $1000:
+
 <pre><code>SELECT * FROM contributors WHERE state = 'GA' OR amount > 1000;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/or_statement.png!
+
+!images/db-browser/or_statement.png!
 
 And now let's try to get the big spenders from Chicago and Georgia:
+
 <pre><code>SELECT * FROM contributors WHERE city = 'Chicago' OR state = 'GA' AND amount > 1000;</code></pre>
-!https://github.com/tthibo/SQL-Tutorial/raw/master/tutorial_files/images/and_or_sans_parens.png!
+
+!images/db-browser/and_or_sans_parens.png!
+
 Hmm . . . Oprah is in the list, but she only donated $500. What gives?
-The problem here is that the AND operator has a higher precedence than the OR operator, which means it gets evaluated first. So, in effect, our query really looks like this:
+
+The problem here is that the @AND@ operator has a higher precedence than the @OR@ operator, which means it gets evaluated first. So, in effect, our query really looks like this:
+
 <pre><code>SELECT * FROM contributors WHERE city = 'Chicago' OR (state = 'GA' AND amount > 1000);</code></pre>
+
 Which selects all contributors from Chicago and only those contributors from Georgia who have also donated more than $1000.
+
 We can use parentheses to clarify the original query and actually get the high rollers we wanted:
+
 <pre><code>SELECT * FROM contributors WHERE (city = 'Chicago' OR state = 'GA') AND amount > 1000;</code></pre>
-Parentheses are often helpful when you need to disambiguate a query. Tehnically, you're changing the order of evaluation here, but you're also just making the intention of your statement clear.
+
+Parentheses are often helpful when you need to disambiguate a query. Technically, you're changing the order of evaluation here, but you're also just making the intention of your statement clear.
 
 h3. Sorting results with ORDER BY
 
